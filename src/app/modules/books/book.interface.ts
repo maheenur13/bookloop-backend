@@ -1,10 +1,18 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
+import { IUser } from './../user/user.interface';
+
+export type IReview = {
+  review: string;
+  user: Types.ObjectId | IUser;
+};
 
 export type IBook = {
   title: string;
   author: string;
   genre: string;
   publicationDate: Date;
+  reviews?: IReview[];
+  uploadedBy?: Types.ObjectId | IUser;
 };
 
 export type IBookFilters = {

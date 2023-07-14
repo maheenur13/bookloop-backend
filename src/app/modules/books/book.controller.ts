@@ -12,7 +12,7 @@ import { BookService } from './book.service';
 const addBook: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const { ...bookData } = req.body;
-    const result = await BookService.addBook(bookData);
+    const result = await BookService.addBook(req.user.id, bookData);
 
     sendResponse<IBook>(res, {
       statusCode: httpStatus.OK,
@@ -50,7 +50,7 @@ const getSingleBook = catchAsync(async (req: Request, res: Response) => {
 const deleteBook = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const result = await BookService.deleteBook(id);
+  const result = await BookService.deleteBook(req.user.id, id);
 
   sendResponse<IBook>(res, {
     statusCode: httpStatus.OK,
@@ -73,6 +73,18 @@ const updateBook = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
+const addReview = catchAsync(async (req: Request, res: Response) => {
+  const { id, reviews } = req.body;
+
+  const result = await BookService.addReview(req.user.id, id, reviews);
+
+  sendResponse<IBook>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Review added successfully!',
+    data: result,
+  });
+});
 
 export const BookController = {
   addBook,
@@ -80,4 +92,5 @@ export const BookController = {
   getSingleBook,
   deleteBook,
   updateBook,
+  addReview,
 };

@@ -7,7 +7,7 @@ import { jwtHelpers } from '../../helpers/jwt.helpers';
 
 const auth = () => async (req: Request, res: Response, next: NextFunction) => {
   try {
-    //get authorization token.
+    //get authorization token
     const token = req.headers.authorization;
 
     if (!token) {
@@ -22,10 +22,6 @@ const auth = () => async (req: Request, res: Response, next: NextFunction) => {
     // set user info to request
     req.user = verifiedUser;
 
-    // verifying valid role to access
-    // if (requiredRoles.length && !requiredRoles.includes(verifiedUser.role)) {
-    //   throw new ApiError(httpStatus.FORBIDDEN, 'FORBIDDEN!');
-    // }
     next();
   } catch (error) {
     next(error);
