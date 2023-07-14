@@ -3,7 +3,6 @@ import { Types } from 'mongoose';
 
 type IPayload = {
   id: Types.ObjectId | string;
-  role: 'admin' | 'seller' | 'buyer';
 };
 
 const createToken = (

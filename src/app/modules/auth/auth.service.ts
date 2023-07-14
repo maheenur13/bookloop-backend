@@ -13,7 +13,7 @@ import {
 
 const signUp = async (user: IUser): Promise<IUser | null> => {
   const isExist = await UserModel.findOne({
-    phoneNumber: user.phoneNumber,
+    email: user.email,
   });
   if (isExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, 'User Already exists!');
@@ -26,9 +26,9 @@ const signUp = async (user: IUser): Promise<IUser | null> => {
 };
 
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
-  const { phoneNumber, password } = payload;
+  const { email, password } = payload;
 
-  const isUserExist = await UserModel.isUserExistByPhone(phoneNumber);
+  const isUserExist = await UserModel.findOne({ email });
 
   if (!isUserExist) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist');
@@ -42,15 +42,15 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   }
 
   //create access token and refresh token
-  const { _id: UserId, role } = isUserExist;
+  const { _id: userId } = isUserExist;
 
   const accessToken = jwtHelpers.createToken(
-    { id: UserId, role },
+    { id: userId },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string
   );
   const refreshToken = jwtHelpers.createToken(
-    { id: UserId, role },
+    { id: userId },
     config.jwt.refresh_secret as Secret,
     config.jwt.refresh_expires_in as string
   );
@@ -78,8 +78,7 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
 
   const newAccessToken = jwtHelpers.createToken(
     {
-      id: isUserExist._id,
-      role: isUserExist.role,
+      id: isUserExist._id!,
     },
     config.jwt.secret as Secret,
     config.jwt.expires_in as string

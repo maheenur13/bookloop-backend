@@ -8,6 +8,6 @@ export type ILoginUserResponse = {
 };
 
 export type ILoginUser = {
-  phoneNumber: string;
+  email: string;
   password: string;
 };
