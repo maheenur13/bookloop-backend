@@ -1,0 +1,25 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\.cc45c3e74e5f8538b68fa0142b7015e25f7cc424-audit.json",
+  "files": [
+    {
+      "date": 1689324869672,
+      "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-14-07-14-error.log",
+      "hash": "cc63377c41c09007e8436514a21eead5c6b1e8f1191173c64c77af02674d78c2"
+    },
+    {
+      "date": 1689328488682,
+      "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-14-07-15-error.log",
+      "hash": "27dca02d89a46c93ae6bcc4629f16dd974b903a5600c0ca702320ea91cca2ae9"
+    },
+    {
+      "date": 1689335715810,
+      "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-14-07-17-error.log",
+      "hash": "c7c316b102d596bc1ca2ee92a2dc017927b618145bc645f73c6424adf00f5f37"
+    }
+  ],
+  "hashType": "sha256"
+}

@@ -1,0 +1,15 @@
+{
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\BookNook\\bookloop\\bookloop-backend\\logs\\winston\\successes\\.6a8ed7b44872a66d310f4edd068ab0c11fd3530d-audit.json",
+  "files": [
+    {
+      "date": 1689288461587,
+      "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\BookNook\\bookloop\\bookloop-backend\\logs\\winston\\successes\\um-2023-14-07-04-success.log",
+      "hash": "cd4b2718c15fd5b84a58e3e4d003aeebe54202edf03c6847313ae68468dd5062"
+    }
+  ],
+  "hashType": "sha256"
+}
