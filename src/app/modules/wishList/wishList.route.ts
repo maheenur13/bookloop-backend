@@ -7,11 +7,11 @@ import { WishListValidation } from './wishList.validation';
 const router = express.Router();
 
 router.post(
-  '/wish-list',
+  '/',
   validateRequest(WishListValidation.wishListZonSchema),
   auth(),
   WishListController.addToWishList
 );
-router.get('/wish-list', auth(), WishListController.getAllWishList);
+router.get('/', auth(), WishListController.getAllWishList);
 
 export const WishListRoutes = router;
