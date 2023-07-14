@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IUser } from './user.interface';
+import { IUser, IWishList } from './user.interface';
 import { UserService } from './user.service';
 
 const getSingleUser = catchAsync(async (req: Request, res: Response) => {
@@ -17,6 +17,25 @@ const getSingleUser = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const addToWishList = catchAsync(async (req: Request, res: Response) => {
+  const { bookId, isWishList } = req.body;
+
+  const result = await UserService.addToWishList(
+    req.user.id,
+    bookId,
+    isWishList
+  );
+
+  sendResponse<IWishList[]>(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message:
+      isWishList === true ? 'Added To Wish List' : 'Remove from Wish List',
+    data: result,
+  });
+});
+
 export const UserController = {
   getSingleUser,
+  addToWishList,
 };

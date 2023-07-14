@@ -18,10 +18,6 @@ const moduleRoutes = [
     path: '/books',
     route: BookRoutes,
   },
-  // {
-  //   path: '/wishlist',
-  //   route: CowsRoutes,
-  // },
 ];
 
 moduleRoutes.forEach(route => router.use(route.path, route.route));

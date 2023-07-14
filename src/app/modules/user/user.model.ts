@@ -10,7 +10,14 @@ const userSchema = new Schema<IUser, IUserModel>(
       required: true,
       type: String,
     },
-
+    wishList: [
+      {
+        bookId: {
+          type: Types.ObjectId,
+          ref: 'Book',
+        },
+      },
+    ],
     password: {
       type: String,
       required: true,
