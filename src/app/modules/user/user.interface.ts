@@ -2,9 +2,7 @@
 import { Model, Types } from 'mongoose';
 import { IBook } from '../books/book.interface';
 
-export type IWishList = {
-  bookId: Types.ObjectId | IBook;
-};
+export type IWishList = Types.ObjectId | IBook;
 
 export type IUser = {
   _id?: Types.ObjectId;

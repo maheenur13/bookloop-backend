@@ -12,10 +12,8 @@ const userSchema = new Schema<IUser, IUserModel>(
     },
     wishList: [
       {
-        bookId: {
-          type: Types.ObjectId,
-          ref: 'Book',
-        },
+        type: Types.ObjectId,
+        ref: 'Book',
       },
     ],
     password: {

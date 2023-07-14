@@ -59,6 +59,11 @@
             "date": 1689368431068,
             "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-15-07-03-error.log",
             "hash": "10295f7ad6544fd8f2771a0f73921806ae84d080b64a39e25505e186b77a62e7"
+        },
+        {
+            "date": 1689372045645,
+            "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-15-07-04-error.log",
+            "hash": "5984c638653465f8c04fcb63555f5830885e3e5ce0c679a2ef929835a24d90af"
         }
     ],
     "hashType": "sha256"

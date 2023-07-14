@@ -7,6 +7,6 @@ const wishListZonSchema = z.object({
   }),
 });
 
-export const UserValidation = {
+export const WishListValidation = {
   wishListZonSchema,
 };
