@@ -1,6 +1,7 @@
 import express from 'express';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { BookRoutes } from '../modules/books/book.route';
+import { PlanTOReadRoutes } from '../modules/planToRead/planToRead.route';
 import { UserRoutes } from '../modules/user/user.route';
 import { WishListRoutes } from '../modules/wishList/wishList.route';
 
@@ -22,6 +23,10 @@ const moduleRoutes = [
   {
     path: '/wish-list',
     route: WishListRoutes,
+  },
+  {
+    path: '/reading-plan',
+    route: PlanTOReadRoutes,
   },
 ];
 

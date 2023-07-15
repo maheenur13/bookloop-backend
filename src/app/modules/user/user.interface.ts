@@ -4,11 +4,17 @@ import { IBook } from '../books/book.interface';
 
 export type IWishList = Types.ObjectId | IBook;
 
+export type IReadingPlans = {
+  book: Types.ObjectId | IBook;
+  status: 'in-complete' | 'complete';
+};
+
 export type IUser = {
   _id?: Types.ObjectId;
   email: string;
   password: string;
   wishList?: IWishList[];
+  readingPlans?: IReadingPlans[];
 };
 
 type IUserModelStaticType = {

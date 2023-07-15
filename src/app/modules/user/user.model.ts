@@ -16,6 +16,18 @@ const userSchema = new Schema<IUser, IUserModel>(
         ref: 'Book',
       },
     ],
+    readingPlans: [
+      {
+        book: {
+          type: Types.ObjectId,
+          ref: 'Book',
+        },
+        status: {
+          type: String,
+          enum: ['in-complete', 'complete'],
+        },
+      },
+    ],
     password: {
       type: String,
       required: true,
