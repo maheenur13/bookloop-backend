@@ -16,15 +16,15 @@ const addToWishList = async (
   if (isExist) {
     await WishListModel.findOneAndUpdate(
       { user: user },
-      { $push: { book: book } }
+      { $push: { books: book } }
     );
   } else {
-    await WishListModel.create({ user: user, book: [book] });
+    await WishListModel.create({ user: user, books: [book] });
   }
 
   return await WishListModel.findOne({ user: user })
     .populate('user')
-    .populate('book');
+    .populate(['books']);
 
   // return result?.wishList || [];
 };

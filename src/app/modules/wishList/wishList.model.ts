@@ -3,7 +3,7 @@ import { IWishList, IWishListModel } from './wishList.interface';
 
 const wishListSchema = new Schema<IWishList, IWishListModel>(
   {
-    book: [
+    books: [
       {
         type: Types.ObjectId,
         ref: 'Book',
