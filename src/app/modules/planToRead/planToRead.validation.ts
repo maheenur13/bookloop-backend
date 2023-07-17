@@ -8,7 +8,8 @@ const planToReadZonSchema = z.object({
 });
 const updateReadingStatusZonSchema = z.object({
   body: z.object({
-    status: z.enum(['pending', 'complete'], {
+    book: z.string().optional(),
+    status: z.enum(['in-complete', 'complete'], {
       required_error: 'status is required',
     }),
   }),

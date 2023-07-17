@@ -1,29 +1,32 @@
-import { Types } from 'mongoose';
-import { IWishList } from '../user/user.interface';
-import { UserModel } from '../user/user.model';
+import { IWishList } from './wishList.interface';
+import { WishListModel } from './wishList.model';
 
-const getAllWishList = async (id: string): Promise<IWishList[]> => {
-  return (await UserModel.findById(id).populate('wishList'))?.wishList || [];
+const getAllWishList = async (user: string): Promise<IWishList | null> => {
+  return await WishListModel.findOne({ user: user })
+    .populate('user')
+    .populate('book');
 };
 
 const addToWishList = async (
-  userId: Types.ObjectId,
-  bookId: string,
-  isWishList: boolean
-): Promise<IWishList[]> => {
-  const query = isWishList
-    ? {
-        $push: { wishList: bookId },
-      }
-    : {
-        $pull: { wishList: bookId },
-      };
+  user: string,
+  book: string
+): Promise<IWishList | null> => {
+  const isExist = await WishListModel.findOne({ user: user });
 
-  const result = await UserModel.findByIdAndUpdate(userId, query, {
-    new: true,
-  }).populate('wishList');
+  if (isExist) {
+    await WishListModel.findOneAndUpdate(
+      { user: user },
+      { $push: { book: book } }
+    );
+  } else {
+    await WishListModel.create({ user: user, book: [book] });
+  }
 
-  return result?.wishList || [];
+  return await WishListModel.findOne({ user: user })
+    .populate('user')
+    .populate('book');
+
+  // return result?.wishList || [];
 };
 
 export const WishListService = {

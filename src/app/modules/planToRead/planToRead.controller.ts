@@ -2,13 +2,13 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IReadingPlans } from '../user/user.interface';
+import { IReadingPlans } from './planToRead.interface';
 import { PlanToReadService } from './planToRead.service';
 
 const getAllPlanToReading = catchAsync(async (req: Request, res: Response) => {
   const result = await PlanToReadService.getAllPlanToReading(req.user.id);
 
-  sendResponse<IReadingPlans[]>(res, {
+  sendResponse<IReadingPlans>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'All reading plan retrieved successfully!',
@@ -25,7 +25,7 @@ const addPlanToReading = catchAsync(async (req: Request, res: Response) => {
     status
   );
 
-  sendResponse<IReadingPlans[]>(res, {
+  sendResponse<IReadingPlans>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Added To Plan List',
@@ -42,7 +42,7 @@ const updateReadingStatus = catchAsync(async (req: Request, res: Response) => {
     status
   );
 
-  sendResponse<IReadingPlans[]>(res, {
+  sendResponse<IReadingPlans>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Updated reading status',

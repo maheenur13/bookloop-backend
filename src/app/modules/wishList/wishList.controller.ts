@@ -2,13 +2,13 @@ import { Request, Response } from 'express';
 import httpStatus from 'http-status';
 import catchAsync from '../../../shared/catchAsync';
 import sendResponse from '../../../shared/sendResponse';
-import { IWishList } from '../user/user.interface';
+import { IWishList } from './wishList.interface';
 import { WishListService } from './wishList.service';
 
 const getAllWishList = catchAsync(async (req: Request, res: Response) => {
   const result = await WishListService.getAllWishList(req.user.id);
 
-  sendResponse<IWishList[]>(res, {
+  sendResponse<IWishList>(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Wish List retrieved successfully!',
@@ -17,19 +17,15 @@ const getAllWishList = catchAsync(async (req: Request, res: Response) => {
 });
 
 const addToWishList = catchAsync(async (req: Request, res: Response) => {
-  const { bookId, isWishList } = req.body;
+  const { book } = req.body;
+  const { id } = req.user;
 
-  const result = await WishListService.addToWishList(
-    req.user.id,
-    bookId,
-    isWishList
-  );
+  const result = await WishListService.addToWishList(id, book);
 
-  sendResponse<IWishList[]>(res, {
+  sendResponse<IWishList>(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message:
-      isWishList === true ? 'Added To Wish List' : 'Remove from Wish List',
+    message: 'Added To Wish List',
     data: result,
   });
 });

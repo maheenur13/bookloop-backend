@@ -1,53 +1,90 @@
 import { Types } from 'mongoose';
-import { IReadingPlans } from '../user/user.interface';
-import { UserModel } from '../user/user.model';
+import { IReadingPlans } from './planToRead.interface';
+import { PlanToReadModel } from './planToRead.model';
 
-const getAllPlanToReading = async (id: string): Promise<IReadingPlans[]> => {
-  return (
-    (
-      await UserModel.findById(id).populate({
-        path: 'readingPlans',
-        populate: [{ path: 'book' }],
-      })
-    )?.readingPlans || []
-  );
+const getAllPlanToReading = async (
+  user: string
+): Promise<IReadingPlans | null> => {
+  return await PlanToReadModel.findOne({ user: user })
+    .populate('user')
+    .populate({
+      path: 'books',
+      populate: [
+        {
+          path: 'book',
+        },
+      ],
+    });
 };
 
 const addPlanToReading = async (
-  userId: Types.ObjectId,
+  user: Types.ObjectId,
   book: string,
   status: 'in-complete' | 'complete' = 'in-complete'
-): Promise<IReadingPlans[]> => {
-  const query = {
-    $push: { readingPlans: { book, status } },
-  };
+): Promise<IReadingPlans | null> => {
+  const isExist = await PlanToReadModel.findOne({ user: user });
 
-  const result = await UserModel.findByIdAndUpdate(userId, query, {
-    new: true,
-  }).populate({
-    path: 'readingPlans',
-    populate: [{ path: 'book' }],
-  });
-
-  return result?.readingPlans || [];
+  if (isExist) {
+    await PlanToReadModel.findOneAndUpdate(
+      { user: user },
+      {
+        $push: {
+          books: {
+            book: book,
+            status: status,
+          },
+        },
+      }
+    );
+  } else {
+    await PlanToReadModel.create({
+      user: user,
+      books: [
+        {
+          book: book,
+          status: status,
+        },
+      ],
+    });
+  }
+  return await PlanToReadModel.findOne({ user: user })
+    .populate('user')
+    .populate({
+      path: 'books',
+      populate: [
+        {
+          path: 'book',
+        },
+      ],
+    });
 };
 const updateReadingStatus = async (
-  userId: Types.ObjectId,
+  user: Types.ObjectId,
   book: string,
   status: 'in-complete' | 'complete'
-): Promise<IReadingPlans[]> => {
+): Promise<IReadingPlans | null> => {
   const query = {
-    $set: { 'readingPlans.$.status': status },
+    $set: { 'books.status': status },
   };
 
-  const result = await UserModel.findOneAndUpdate(userId, query, {
-    new: true,
-  }).populate({
-    path: 'readingPlans',
-    populate: [{ path: 'book' }],
-  });
+  const result = await PlanToReadModel.findOneAndUpdate(
+    { user: user, 'books.book': book },
+    query,
+    {
+      new: true,
+    }
+  )
+    .populate('user')
+    .populate({
+      path: 'books',
+      populate: [
+        {
+          path: 'book',
+        },
+      ],
+    });
 
-  return result?.readingPlans || [];
+  return result;
 };
 
 export const PlanToReadService = {
