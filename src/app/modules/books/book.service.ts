@@ -20,6 +20,8 @@ const addBook = async (
     );
   }
 
+  bookData.publicationYear = new Date().getFullYear();
+
   return (await BookModel.create({ ...bookData, uploadedBy: userId })).populate(
     'uploadedBy'
   );

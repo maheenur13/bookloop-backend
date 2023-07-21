@@ -11,6 +11,7 @@ export type IBook = {
   author: string;
   genre: string;
   publicationDate: Date;
+  publicationYear: number;
   reviews?: IReview[];
   uploadedBy?: Types.ObjectId | IUser;
 };
