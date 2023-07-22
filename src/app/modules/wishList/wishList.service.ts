@@ -14,10 +14,20 @@ const addToWishList = async (
   const isExist = await WishListModel.findOne({ user: user });
 
   if (isExist) {
-    await WishListModel.findOneAndUpdate(
-      { user: user },
-      { $push: { books: book } }
-    );
+    if (!isExist.books.find(itm => itm.toString() === book)) {
+      await WishListModel.findOneAndUpdate(
+        { user: user },
+        { $push: { books: book } }
+      );
+    } else {
+      const newBooks = [...isExist.books].filter(
+        item => item.toString() !== book
+      );
+      await WishListModel.findOneAndUpdate(
+        { user: user },
+        { $set: { books: newBooks } }
+      );
+    }
   } else {
     await WishListModel.create({ user: user, books: [book] });
   }
