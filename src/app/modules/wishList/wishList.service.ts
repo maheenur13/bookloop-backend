@@ -1,5 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Document } from 'mongoose';
 import { IWishList } from './wishList.interface';
 import { WishListModel } from './wishList.model';
+
+type IWishListType = {
+  user: string; // Assuming user is of type string
+  books: string[]; // Assuming books are represented as an array of strings
+} & Document;
 
 const getAllWishList = async (user: string): Promise<IWishList | null> => {
   return await WishListModel.findOne({ user: user })
@@ -11,10 +18,12 @@ const addToWishList = async (
   user: string,
   book: string
 ): Promise<IWishList | null> => {
-  const isExist = await WishListModel.findOne({ user: user });
+  const isExist: IWishListType | null = await WishListModel.findOne({
+    user: user,
+  });
 
   if (isExist) {
-    if (!isExist.books.find(itm => itm.toString() === book)) {
+    if (!isExist.books?.find((itm: any) => itm.toString() === book)) {
       await WishListModel.findOneAndUpdate(
         { user: user },
         { $push: { books: book } }
