@@ -4,7 +4,7 @@ import { WishListModel } from './wishList.model';
 const getAllWishList = async (user: string): Promise<IWishList | null> => {
   return await WishListModel.findOne({ user: user })
     .populate('user')
-    .populate('book');
+    .populate(['books']);
 };
 
 const addToWishList = async (
