@@ -129,6 +129,11 @@
             "date": 1690090649600,
             "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-23-07-11-error.log",
             "hash": "03e4f6d527111b51dfe478faf8f9f896bcf013338441059a8df837295af0d1b8"
+        },
+        {
+            "date": 1690094929120,
+            "name": "C:\\Users\\Mahee\\Desktop\\NEXT_WEB_COURSE\\Assignment-5\\bookloop-backend\\logs\\winston\\errors\\um-2023-23-07-12-error.log",
+            "hash": "e1a42080d74e7d10743ac0c8b3551689244aac151b9a66d26fe7b0bc7ec70f83"
         }
     ],
     "hashType": "sha256"

@@ -64,7 +64,7 @@ const updateReadingStatus = async (
   status: 'in-complete' | 'complete'
 ): Promise<IReadingPlans | null> => {
   const query = {
-    $set: { 'books.status': status },
+    $set: { 'books.$.status': status },
   };
 
   const result = await PlanToReadModel.findOneAndUpdate(
